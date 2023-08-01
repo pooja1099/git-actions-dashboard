@@ -22,9 +22,6 @@ jobs:
          NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
 
-      - name: "newRelic-setup"
-        uses:  newrelic/newrelic@2.21
-        
       - name: terraform init
         run: |
           cd dashboard
