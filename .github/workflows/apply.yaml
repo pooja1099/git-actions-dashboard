@@ -1,11 +1,11 @@
 name: applying
 on:  
-  # pull_request:
-  #   branches:
-  #     - main
-  # push:
-  #   branches:
-  #     - main
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
   workflow_dispatch:
 jobs:
   job-make-infra:
@@ -23,21 +23,15 @@ jobs:
          account_id: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
 
       - name: terraform init
-        env:
-          api_key: ${{ secrets.NEW_RELIC_API_KEY }}
         run: |
           cd dashboard
           terraform init 
-      - name: terraform plan
-        env:
-          api_key: ${{ secrets.NEW_RELIC_API_KEY }}  
+      - name: terraform plan 
         run: |
           cd dashboard
           terraform plan
         
       - name: terraform apply
-        env:
-          api_key: ${{ secrets.NEW_RELIC_API_KEY }}
         run: |
           cd dashboard
           terraform apply -auto-approve
