@@ -7,6 +7,14 @@ on:
   #   branches:
   #     - main
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'Apply or Destroy'
+        required: true
+        default: 'apply'
+        options:
+          - 'apply'
+          - 'destroy'
 jobs:
   job-make-infra:
     runs-on : ubuntu-latest
@@ -31,8 +39,16 @@ jobs:
           terraform plan
         
       - name: terraform apply
+        if: github.event.inputs.action == 'apply'
         run: |
+         
           cd dashboard
           terraform apply -auto-approve
+
+      - name: terraform destroy
+        if: github.event.inputs.action == 'destroy'
+        run: |
+          cd dashboard
+          terraform destroy -auto-approve
 
   
