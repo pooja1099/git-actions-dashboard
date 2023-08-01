@@ -1,6 +1,5 @@
 name: applying
-on:
-    on:  
+on:  
   pull_request:
     branches:
       - main
@@ -10,8 +9,8 @@ on:
 jobs:
   job-make-infra:
     runs-on : ubuntu-latest
-    steps:
-     
+
+    steps: 
       - name: "Setup - Checkout"
         uses: actions/checkout@v2.1.0
 
