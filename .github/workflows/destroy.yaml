@@ -20,15 +20,10 @@ jobs:
         # with:
         #  NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
         #  NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-      - name: terraform init
-        run: |
-          cd dashboard
-          terraform init
-
-       - name: terraform plan 
-        run: |
-          cd dashboard
-          terraform plan 
+      # - name: terraform init
+      #   run: |
+      #     cd dashboard
+      #     terraform init
         
       - name: terraform destroy
         run: |
