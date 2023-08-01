@@ -1,0 +1,24 @@
+name: applying
+on:
+    push:
+    branches: [ "main" ]
+    pull_request:
+    branches: [ "main" ]
+
+jobs:
+  job-make-infra:
+    runs-on : ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Terraform hashicorp setup
+        uses: hashicorp/setup-terraform@v2
+
+      - name: terraform init
+        run: |
+          cd dashboard
+          terraform init 
+      - name: terraform plan & apply
+        run: |
+          cd dashboard
+          terraform plan
+          terraform apply -auto-approve
