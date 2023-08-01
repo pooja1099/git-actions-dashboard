@@ -15,6 +15,12 @@ on:
         options:
           - 'apply'
           - 'destroy'
+      value:
+        description: "name of apply and destroy"
+        required: true
+        option:
+        - 'apply'
+        - 'destroy'
 jobs:
   job-make-infra:
     runs-on : ubuntu-latest
@@ -38,17 +44,21 @@ jobs:
           cd dashboard
           terraform plan
         
-      - name: terraform apply
-        if: github.event.inputs.action == 'apply'
+      - name: terraform ${{github.event.inputs.value}}
+        # if: github.event.inputs.action == 'apply'
         run: |
          
           cd dashboard
-          terraform apply -auto-approve
+          terraform ${{github.event.inputs.action}} -auto-approve
 
-      - name: terraform destroy
-        if: github.event.inputs.action == 'destroy'
-        run: |
-          cd dashboard
-          terraform destroy -auto-approve
+        # terraform apply -auto-approve
+
+#if we are using if for apply and destroy  
+      # - name: terraform destroy
+      #   if: github.event.inputs.action == 'destroy'
+      #   run: |
+      #     cd dashboard
+      #     terraform destroy -auto-approve
+
 
   
