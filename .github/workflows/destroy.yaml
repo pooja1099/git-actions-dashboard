@@ -17,9 +17,9 @@ jobs:
 
       - name: "Setup - Terraform CLI"
         uses: hashicorp/setup-terraform@v1
-        # with:
-        #  NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
-        #  NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+        with:
+         NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
+         NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
       - name: terraform init
         run: |
           cd dashboard
@@ -28,5 +28,5 @@ jobs:
       - name: terraform destroy
         run: |
           cd dashboard
-          terraform destroy 
+          terraform destroy -auto-approve
     

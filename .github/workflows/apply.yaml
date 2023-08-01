@@ -34,4 +34,26 @@ jobs:
         run: |
           cd dashboard
           terraform apply -auto-approve
-    
+
+  job-destroy-infra:
+    runs-on : ubuntu-latest
+
+    steps: 
+      - name: "Setup - Checkout"
+        uses: actions/checkout@v2.1.0
+
+      - name: "Setup - Terraform CLI"
+        uses: hashicorp/setup-terraform@v1
+        with:
+         NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
+         NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+      - name: terraform init
+        run: |
+          cd dashboard
+          terraform init
+        
+      - name: terraform destroy
+        run: |
+          cd dashboard
+          terraform destroy -auto-approve
+      
