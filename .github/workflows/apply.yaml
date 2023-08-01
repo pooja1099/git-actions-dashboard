@@ -19,8 +19,8 @@ jobs:
       - name: "Setup - Terraform CLI"
         uses: hashicorp/setup-terraform@v1
         with:
-         NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
-         NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+         api_key: ${{ secrets.NEW_RELIC_API_KEY }}
+         account_id: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
 
       - name: terraform init
         run: |
