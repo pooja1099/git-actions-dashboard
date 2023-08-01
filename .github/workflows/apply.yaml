@@ -1,17 +1,26 @@
 name: applying
 on:
-    push:
+    on:  
+  pull_request:
     branches:
       - main
-
+  push:
+    branches:
+      - main
 jobs:
   job-make-infra:
     runs-on : ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Terraform hashicorp setup
-        uses: hashicorp/setup-terraform@v2
+     
+      - name: "Setup - Checkout"
+        uses: actions/checkout@v2.1.0
 
+      # - uses: actions/checkout@v3
+      - name: "Setup - Terraform CLI"
+        uses: hashicorp/setup-terraform@v1
+         with:
+         NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
+         NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
       - name: terraform init
         run: |
           cd dashboard
@@ -21,6 +30,6 @@ jobs:
           cd dashboard
           terraform plan
           terraform apply -auto-approve
-    env:
-          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-          NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
+    # env:
+    #       NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+    #       NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
