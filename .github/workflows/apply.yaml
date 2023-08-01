@@ -14,13 +14,12 @@ jobs:
     steps: 
       - name: "Setup - Checkout"
         uses: actions/checkout@v2.1.0
-
-      # - uses: actions/checkout@v3
+        
       - name: "Setup - Terraform CLI"
         uses: hashicorp/setup-terraform@v1
-        with:
-         api_key: ${{ secrets.NEW_RELIC_API_KEY }}
-         account_id: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+        # with:
+        #  api_key: ${{ secrets.NEW_RELIC_API_KEY }}
+        #  account_id: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
 
       - name: terraform init
         run: |
