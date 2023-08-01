@@ -21,3 +21,6 @@ jobs:
           cd dashboard
           terraform plan
           terraform apply -auto-approve
+    env:
+          NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+          NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
